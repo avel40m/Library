@@ -42,7 +42,8 @@ public class ConfigurationSecurity {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/api/authenticate").permitAll()
+                        req -> req.requestMatchers("/api/authenticate", "/v3/api-docs/**",  "/swagger-ui/**", "/swagger-ui.html")
+                                .permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/book/").hasRole("Employee")
                                 .requestMatchers(HttpMethod.GET, "/api/book/**").hasRole("Employee")
                                 .requestMatchers(HttpMethod.POST, "/api/book/**").hasRole("Boss")
