@@ -33,4 +33,9 @@ public class CategoryController {
     public ResponseEntity<Void> updateCategory(@RequestBody Category request){
         return categoryService.editCategory(request);
     }
+
+    @DeleteMapping("/categoryId")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId){
+        return categoryService.deleteCategory(categoryId);
+    }
 }

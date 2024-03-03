@@ -68,10 +68,7 @@ public class IBookService implements BookService{
                 logger.warn("Category not found");
                 return ResponseEntity.notFound().build();
             }
-            var newBook = new Book();
-            newBook.setName(book.getName());
-            newBook.setDescription(book.getDescription());
-            newBook.setCategory(categoryOptional.get());
+            var newBook = new Book(null,book.getName(), book.getDescription(), categoryOptional.get());
 
             logger.info("Book saved successful");
             return ResponseEntity
@@ -86,6 +83,11 @@ public class IBookService implements BookService{
     @Override
     public ResponseEntity<Void> updateBook(Book book) {
         try{
+            Optional<Category> categoryOptional = categoryRepository.findById(book.getCategory().getId());
+            if (categoryOptional.isEmpty()){
+                logger.warn("Category not found");
+                return ResponseEntity.notFound().build();
+            }
             Optional<Book> bookOptional = bookRepository.findById(book.getId());
             if (bookOptional.isEmpty()){
                 logger.info("Book not found");
@@ -96,7 +98,7 @@ public class IBookService implements BookService{
             bookRepository.save(bookOptional.get());
             logger.info("Book updated successful");
             return ResponseEntity
-                    .status(HttpStatus.NOT_MODIFIED)
+                    .status(HttpStatus.NO_CONTENT)
                     .build();
         } catch (BookException e){
             logger.error("Error: " + e);
@@ -114,7 +116,7 @@ public class IBookService implements BookService{
             }
             bookRepository.deleteById(bookId);
             logger.info("Book deleted successful");
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (BookException e){
             logger.error("Error: " + e);
             return ResponseEntity.internalServerError().build();

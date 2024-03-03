@@ -40,9 +40,15 @@ public class ICategoryService implements CategoryService{
     public ResponseEntity<Category> searchById(Long categoryId) {
         try{
             logger.info("Search id for category");
+            Optional<Category> category = categoryRepository.findById(categoryId);
+            if (category.isEmpty()){
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .build();
+            }
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(categoryRepository.findById(categoryId).get());
+                    .body(category.get());
         } catch (CategoryException e){
             logger.error("Error: " + e);
             return ResponseEntity.internalServerError().build();
@@ -76,7 +82,7 @@ public class ICategoryService implements CategoryService{
         try{
             categoryRepository.save(category);
             logger.info("Update category");
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (CategoryException e){
             logger.error("Error: " + e);
             return ResponseEntity.internalServerError().build();
@@ -88,7 +94,7 @@ public class ICategoryService implements CategoryService{
         try {
             categoryRepository.deleteById(categoryId);
             logger.info("Category delete by id");
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (CategoryException e){
             logger.error("Error: " + e);
             return ResponseEntity.internalServerError().build();

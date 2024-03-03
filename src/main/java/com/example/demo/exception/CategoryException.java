@@ -1,7 +1,7 @@
 package com.example.demo.exception;
 
 public class CategoryException extends RuntimeException{
-    CategoryException(String message){
+    public CategoryException(String message){
         super(message);
     }
 }

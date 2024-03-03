@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.TokenResponse;
 import com.example.demo.service.JwtService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +15,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
+@NoArgsConstructor
 public class TokenController {
 
     @Autowired
