@@ -14,8 +14,12 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long isbn;
     private String name;
     private String description;
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 }

@@ -4,6 +4,7 @@ import com.example.demo.dto.BookDto;
 import com.example.demo.exception.BookException;
 import com.example.demo.model.Book;
 import com.example.demo.model.Category;
+import com.example.demo.model.Stock;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -68,7 +69,12 @@ public class IBookService implements BookService{
                 logger.warn("Category not found");
                 return ResponseEntity.notFound().build();
             }
-            var newBook = new Book(null,book.getName(), book.getDescription(), categoryOptional.get());
+            if (book.getQuantity() <= 0){
+                logger.warn("The quantity field was not completed");
+                return ResponseEntity.notFound().build();
+            }
+            var stock = new Stock(null, book.getQuantity());
+            var newBook = new Book(null,book.getIsbn(),book.getName(), book.getDescription(), categoryOptional.get(), stock);
 
             logger.info("Book saved successful");
             return ResponseEntity
