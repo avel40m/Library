@@ -30,7 +30,7 @@ public class BookControllerTest {
 
     @Test
     void allBookTest(){
-        var book = new Book(1L,"Book title", "Book description", null);
+        var book = new Book(1L,null,"Book title", "Book description", null, null);
         List<Book> bookList = new ArrayList<>();
         bookList.add(book);
         when(bookService.allBooks()).thenReturn(new ResponseEntity<>(bookList, HttpStatus.OK));
@@ -42,7 +42,7 @@ public class BookControllerTest {
 
     @Test
     void searchBookByIdTest(){
-        var book = new Book(1L,"Book title", "Book description", null);
+        var book = new Book(1L,null,"Book title", "Book description", null, null);
         when(bookService.searchById(1L)).thenReturn(new ResponseEntity<>(book, HttpStatus.OK));
         var response = bookController.searchBookById(1L);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -52,7 +52,7 @@ public class BookControllerTest {
 
     @Test
     void saveBookTest(){
-        var book = new Book(1L,"Book title", "Book description", null);
+        var book = new Book(1L,null,"Book title", "Book description", null, null);
         when(bookService.saveBook(any())).thenReturn(new ResponseEntity<>(book,HttpStatus.CREATED));
         var response = bookController.saveBook(any());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());

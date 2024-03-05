@@ -10,8 +10,8 @@ public class BookDtoTest {
         var name = "title";
         var description = "description";
         var categoryId = 1L;
-        var bookDto = new BookDto(name, description, categoryId);
-        var bookDtoTwo = new BookDto(name, description, categoryId);
+        var bookDto = new BookDto(123L,name, description, 1L,10);
+        var bookDtoTwo = new BookDto(123L,name, description, 1L,10);
 
         var hashCodeOne = bookDto.hashCode();
         var hashCodeTwo = bookDto.hashCode();
@@ -19,7 +19,7 @@ public class BookDtoTest {
         assertEquals(name, bookDto.getName());
         assertEquals(description, bookDto.getDescription());
         assertEquals(categoryId, bookDto.getCategoryId());
-        assertEquals("BookDto(name=title, description=description, categoryId=1)",bookDto.toString());
+        assertEquals("BookDto(isbn=123, name=title, description=description, categoryId=1, quantity=10)",bookDto.toString());
         assertEquals(hashCodeOne, hashCodeTwo);
         assertTrue(bookDto.equals(bookDto));
         assertFalse(bookDtoTwo.equals(null));

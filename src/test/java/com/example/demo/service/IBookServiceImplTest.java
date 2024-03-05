@@ -29,7 +29,8 @@ public class IBookServiceImplTest {
     private IBookService bookService;
 
     private final Category category = new Category(1L, "Title category","Description category");
-    private final Book book = new Book(1L,"Title Book","Description book", category);
+    private final Book book = new Book(1L,123L,"Book title", "Book description", category, null);
+
 
     @BeforeEach
     public void setUp() {
@@ -76,29 +77,29 @@ public class IBookServiceImplTest {
 
     @Test
     void saveBookTest(){
-        var bookDTO = new BookDto("Title book","Description book", 1L);
-        var saveBook = new Book(null, bookDTO.getName(),bookDTO.getDescription(),category);
+        var bookDto = new BookDto(123L,"title", "description", 1L,10);
+        var saveBook = new Book(null, 123L,bookDto.getName(),bookDto.getDescription(),category,null);
         when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
         when(bookRepository.save(any(Book.class))).thenReturn(saveBook);
-        var response = bookService.saveBook(bookDTO);
+        var response = bookService.saveBook(bookDto);
         assertEquals(201, response.getStatusCode().value());
         verify(bookRepository,timeout(1)).save(any());
     }
 
     @Test
     void saveBookCategoryNotFound(){
-        var bookDTO = new BookDto("Title book","Description book", 1L);
+        var bookDto = new BookDto(123L,"title", "description", 1L,10);
         when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
-        var response = bookService.saveBook(bookDTO);
+        var response = bookService.saveBook(bookDto);
         assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
     void saveBookException() throws BookException{
-        var bookDTO = new BookDto("Title book","Description book", 1L);
+        var bookDto = new BookDto(123L,"title", "description", 1L,10);
         when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
         when(bookRepository.save(any())).thenThrow(new BookException("Error"));
-        var response = bookService.saveBook(bookDTO);
+        var response = bookService.saveBook(bookDto);
         assertEquals(500, response.getStatusCode().value());
     }
 

@@ -9,11 +9,10 @@ public class BookTest {
     @Test
     void bookModelAndGetting(){
         var id = 1L;
-        var name = "Title";
-        var description = "Description";
-        var category = new Category(id, name, description);
-        var book = new Book(id,name,description, category);
-        var bookTwo = new Book(id,name,description, category);
+        var name = "Book title";
+        var description = "Book description";
+        var book = new Book(1L,null,"Book title", "Book description", null, null);
+        var bookTwo = new Book(1L,null,"Book title", "Book description", null, null);
 
         var hashCodeOne = book.hashCode();
         var hashCodeTwo = bookTwo.hashCode();
@@ -21,10 +20,8 @@ public class BookTest {
         assertEquals(id, book.getId());
         assertEquals(name, book.getName());
         assertEquals(description, book.getDescription());
-        assertEquals(category, book.getCategory());
-        assertEquals("Book(id=1, name=Title, description=Description, category=Category(id=1, name=Title, description=Description))",book.toString());
+        assertEquals("Book(id=1, isbn=null, name=Book title, description=Book description, category=null, stock=null)",book.toString());
         assertEquals(hashCodeOne, hashCodeTwo);
-        assertTrue(category.equals(category));
         assertFalse(bookTwo.equals(null));
         assertFalse(bookTwo.equals(""));
         assertTrue(book.equals(bookTwo));
