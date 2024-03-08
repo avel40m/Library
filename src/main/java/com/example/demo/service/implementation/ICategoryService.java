@@ -1,8 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.service.implementation;
 
 import com.example.demo.exception.CategoryException;
 import com.example.demo.model.Category;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class ICategoryService implements CategoryService{
+public class ICategoryService implements CategoryService {
 
     private final Logger logger = LoggerFactory.getLogger(ICategoryService.class);
 

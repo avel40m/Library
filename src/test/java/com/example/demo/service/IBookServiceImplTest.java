@@ -6,6 +6,7 @@ import com.example.demo.model.Book;
 import com.example.demo.model.Category;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.service.implementation.IBookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

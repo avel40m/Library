@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.implementation;
 
 import com.example.demo.dto.BookDto;
 import com.example.demo.exception.BookException;
@@ -7,6 +7,7 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Stock;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.service.BookService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class IBookService implements BookService{
+public class IBookService implements BookService {
     private final Logger logger = LoggerFactory.getLogger(IBookService.class);
     @Autowired
     private final BookRepository bookRepository;

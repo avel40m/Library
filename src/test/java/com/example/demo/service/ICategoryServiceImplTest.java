@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.exception.CategoryException;
 import com.example.demo.model.Category;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.service.implementation.ICategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
