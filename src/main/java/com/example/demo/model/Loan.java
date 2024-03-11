@@ -11,7 +11,6 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "system_loan")
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +22,9 @@ public class Loan {
     @Column(name = "return_date")
     @Temporal(TemporalType.DATE)
     private Date returned;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
+    @OneToOne
     private Client client;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id")
+    @OneToOne
     private Book book;
 
 }

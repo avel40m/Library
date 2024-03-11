@@ -22,4 +22,6 @@ public class Book {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
     private Stock stock;
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+    private Loan loan;
 }

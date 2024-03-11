@@ -18,4 +18,6 @@ public class Client {
     private String email;
     private String dni;
     private String phone;
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private Loan loan;
 }

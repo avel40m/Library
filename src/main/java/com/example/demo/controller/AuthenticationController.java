@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.TokenResponse;
+import com.example.demo.model.User;
 import com.example.demo.service.JwtService;
+import com.example.demo.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class TokenController {
     private UserDetailsService userDetailsService;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenResponse> authenticate(@RequestBody AuthRequest request){
@@ -37,6 +41,11 @@ public class TokenController {
         final String jwt = jwtService.generateToken(userDetails);
 
         return ResponseEntity.ok(new TokenResponse(jwt));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody User user){
+        return userService.createUser(user);
     }
 
 }
