@@ -58,7 +58,7 @@ public class IClientService implements ClientService {
                 logger.warn("The DNI not found");
                 return ResponseEntity.notFound().build();
             }
-            var newClient = new Client(null, client.getFullName(), client.getEmail(), client.getDni(), client.getPhone());
+            var newClient = new Client(null, client.getFullName(), client.getEmail(), client.getDni(), client.getPhone(), null);
             logger.info("Creating new client");
             return ResponseEntity
                     .status(HttpStatus.CREATED)

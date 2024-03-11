@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthRequest;
+import com.example.demo.model.User;
 import com.example.demo.service.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TokenControllerTest {
+public class AuthenticationControllerTest {
     @Mock
     private AuthenticationManager authenticationManager;
     @Mock
@@ -24,7 +25,7 @@ public class TokenControllerTest {
     @Mock
     private JwtService jwtService;
     @InjectMocks
-    private TokenController tokenController;
+    private AuthenticationController tokenController;
 
     @BeforeEach
     void setUp(){
@@ -32,20 +33,19 @@ public class TokenControllerTest {
         authenticationManager = mock(AuthenticationManager.class);
         userDetailsService = mock(UserDetailsService.class);
         jwtService = mock(JwtService.class);
-
-        tokenController = new TokenController(authenticationManager, userDetailsService, jwtService);
     }
 
     @Test
     void authenticateTest(){
-        var auth = new AuthRequest("username","password");
+        var auth = new User();
         var userDetails = mock(UserDetails.class);
+        var authRequest = new AuthRequest();
         var token = "token";
-        when(jwtService.generateToken(userDetails)).thenReturn(token);
+        when(jwtService.generateToken(auth)).thenReturn(token);
         when(userDetailsService.loadUserByUsername("username")).thenReturn(userDetails);
-        var response = tokenController.authenticate(auth);
+        var response = tokenController.authenticate(authRequest);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(200, response.getStatusCode().value());
-        assertEquals(token, response.getBody().getJwtToken());
+        assertEquals(token, response.getBody());
     }
 }

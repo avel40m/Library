@@ -75,7 +75,7 @@ public class IBookService implements BookService {
                 return ResponseEntity.notFound().build();
             }
             var stock = new Stock(null, book.getQuantity());
-            var newBook = new Book(null,book.getIsbn(),book.getName(), book.getDescription(), categoryOptional.get(), stock);
+            var newBook = new Book(null,book.getIsbn(),book.getName(), book.getDescription(), categoryOptional.get(), stock, null);
 
             logger.info("Book saved successful");
             return ResponseEntity
